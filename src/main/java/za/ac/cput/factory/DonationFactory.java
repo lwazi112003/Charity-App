@@ -5,8 +5,10 @@ import za.ac.cput.util.Helper;
 import java.time.LocalDate;
 
 public class DonationFactory {
+
+
     public static Donation createDonation(double amount, String donorId, String eventId) {
-        if (!Helper.isValidDouble(amount) || Helper.isNullOrEmpty(donorId)) {
+        if (amount <= 0 || Helper.isNullOrEmpty(donorId)) {
             return null;
         }
 
@@ -17,9 +19,10 @@ public class DonationFactory {
                 .build();
     }
 
+
     public static Donation createDonation(String donationId, double amount, LocalDate donationDate,
                                           String donorId, String eventId) {
-        if (!Helper.isValidDouble(amount) || Helper.isNullOrEmpty(donorId)) {
+        if (amount <= 0 || Helper.isNullOrEmpty(donorId)) {
             return null;
         }
 
@@ -30,5 +33,10 @@ public class DonationFactory {
                 .donorId(donorId)
                 .eventId(eventId)
                 .build();
+    }
+
+
+    public static String generateId() {
+        return Helper.generateId();
     }
 }
