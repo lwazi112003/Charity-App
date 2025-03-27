@@ -2,7 +2,7 @@ package za.ac.cput.Domain;
 
 import java.time.LocalDate;
 
-public class User {
+public class Donation {
     private final String userId;
     private final String firstName;
     private final String lastName;
@@ -11,7 +11,7 @@ public class User {
     private final LocalDate registrationDate;
     private final UserRole role;
 
-    public User(Builder builder) {
+    public Donation(Builder builder) {
         this.userId = builder.userId;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
@@ -79,12 +79,12 @@ public class User {
             return this;
         }
 
-        public User build() {
+        public Donation build() {
             // Add validation logic here
             if (userId == null || firstName == null || lastName == null || email == null) {
                 throw new IllegalStateException("User requires userId, firstName, lastName, and email");
             }
-            return new User(this);
+            return new Donation(this);
         }
     }
 }
