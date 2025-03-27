@@ -4,6 +4,7 @@ import org.charity.domain.*;
 import org.charity.repository.*;
 import org.charity.repository.impl.*;
 import org.charity.util.Helper;
+import za.ac.cput.Domain.User;
 
 import java.time.LocalDate;
 import java.math.BigDecimal;
