@@ -20,7 +20,7 @@ public class Helper {
     // Phone number validation
     public static boolean isValidPhoneNumber(String phoneNumber) {
         if (phoneNumber == null) return false;
-        // Simple regex for valid phone numbers (adjust as needed)
+        // Simple regex for valid phone numbers
         String phoneRegex = "^\\+?\\d{10,14}$";
         return Pattern.compile(phoneRegex).matcher(phoneNumber).matches();
     }
