@@ -1,14 +1,14 @@
 package za.ac.cput.Factory;
 
-import za.ac.cput.Domain.User;
+import za.ac.cput.Domain.Donation;
 
 import java.time.LocalDate;
 
-public class AdminFactory extends User {
+public class DonationFactory extends Donation {
     private final String adminId;
     private final AdminLevel accessLevel;
 
-    private AdminFactory(Builder builder) {
+    private DonationFactory(Builder builder) {
         super(builder);
         this.adminId = builder.adminId;
         this.accessLevel = builder.accessLevel;
@@ -23,7 +23,7 @@ public class AdminFactory extends User {
     }
 
     // Builder Pattern
-    public static class Builder extends User.Builder {
+    public static class Builder extends Donation.Builder {
         private String adminId;
         private AdminLevel accessLevel;
 
@@ -74,12 +74,12 @@ public class AdminFactory extends User {
         }
 
         @Override
-        public AdminFactory build() {
+        public DonationFactory build() {
             if (adminId == null || accessLevel == null) {
                 throw new IllegalStateException("Admin requires adminId and accessLevel");
             }
             super.role(UserRole.ADMIN);
-            return new AdminFactory(this);
+            return new DonationFactory(this);
         }
     }
 }

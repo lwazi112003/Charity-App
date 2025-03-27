@@ -5,7 +5,7 @@ package za.ac.cput.Repository;
 import org.charity.domain.Admin;
 import java.util.List;
 
-public interface AdminRepository extends IRepository<Admin, String> {
+public interface DonationRepository {
     // Find admins by access level
     List<Admin> findByAccessLevel(Admin.AdminLevel accessLevel);
 
