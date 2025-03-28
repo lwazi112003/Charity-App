@@ -33,6 +33,9 @@ public class User {
         return email;
     }
 
+    public void setPassword(Object o) {
+    }
+
     // Builder class
     public static class Builder {
         private String userId;

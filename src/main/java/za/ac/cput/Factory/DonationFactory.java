@@ -1,7 +1,5 @@
 package za.ac.cput.Factory;
 
-import za.ac.cput.Domain.Donation;
-
 import java.time.LocalDate;
 
 public class DonationFactory extends Donation {
