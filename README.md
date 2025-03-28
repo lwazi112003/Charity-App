@@ -6,8 +6,8 @@ Team Members
 Lwazi Shozi      230220061
 Sandile Sibiya   230975623
 Thuso Siduka     
-Zimkhitha Jantijies  
-Simphiwe Mawande
+Zimkhitha Jantijies  222809825
+Simphiwe Mawande 220246009
 
 Domain Model UML Class Diagram
 Show Image
