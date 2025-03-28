@@ -8,8 +8,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DonationRepositoryTest {
-    private static DonationRepository repository = DonationRepository.getRepository();
-    private static Donation donation = DonationFactory.createDonation(150.00, "DONOR-TEST", "EVENT-TEST");
+    private static DonationRepository Repository = DonationRepository.getRepository();
+    private static Donation Donation = DonationFactory.createDonation(150.00, "DONOR-TEST", "EVENT-TEST");
 
     @Test
     @Order(1)
