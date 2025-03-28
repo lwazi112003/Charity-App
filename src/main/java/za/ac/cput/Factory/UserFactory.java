@@ -1,5 +1,7 @@
 package za.ac.cput.Factory;
-
+//lwazi Nhlakanipho Shozi
+//230220061
+//27 March 2025
 import za.ac.cput.Domain.User;
 import za.ac.cput.Domain.Donation;
 import za.ac.cput.util.Helper;
@@ -13,7 +15,7 @@ public class UserFactory {
             throw new IllegalArgumentException("Invalid email address");
         }
 
-        return new User.Builder()
+        return new User.Builder(generateAdminId(), email)
                 .setUserId(generateUserId())
                 .setFirstName(firstName)
                 .setLastName(lastName)

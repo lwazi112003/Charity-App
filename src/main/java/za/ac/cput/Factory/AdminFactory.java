@@ -1,29 +1,26 @@
-package org.charity.domain.factory;
+package za.ac.cput.Factory;
+//lwazi Nhlakanipho Shozi
+//230220061
+//27 March 2025
+import za.ac.cput.Domain.Donation;
+import za.ac.cput.Domain.User;
+import za.ac.cput.util.Helper;
 
-import org.charity.domain.User;
-import org.charity.domain.UserRole;
-import org.charity.util.AdminPrivilegeValidator;
-import org.charity.util.PasswordHasher;
 
 public final class AdminFactory {
 
     // Private constructor to prevent instantiation
     private AdminFactory() {}
 
-    /**
-     * Creates a basic admin user with default privileges
-     */
+
     public static User createAdmin(String email, String firstName, String lastName) {
         return new User.Builder(generateAdminId(), email)
                 .firstName(firstName)
                 .lastName(lastName)
-                .role(UserRole.ADMIN)
+                .role(Donation.UserRole.ADMIN)
                 .build();
     }
 
-    /**
-     * Creates an admin with secured password and privilege level
-     */
     public static User createSecuredAdmin(String email, String plainPassword,
                                           String firstName, String lastName,
                                           int privilegeLevel) {
@@ -38,9 +35,7 @@ public final class AdminFactory {
                 .build();
     }
 
-    /**
-     * Creates a super admin with all privileges
-     */
+
     public static User createSuperAdmin(String email, String securePassword) {
         return createSecuredAdmin(email, securePassword,
                 "Super", "Admin",
