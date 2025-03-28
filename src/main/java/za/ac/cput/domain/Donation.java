@@ -1,5 +1,9 @@
 package za.ac.cput.domain;
+/* Donation .java
+Donation  model class
+Author: Zimkhitha Jantjies (222809825)
 
+*/
 import za.ac.cput.util.Helper;
 import java.time.LocalDate;
 import java.util.Objects;

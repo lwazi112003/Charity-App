@@ -1,103 +1,182 @@
 package za.ac.cput.repository;
 
+import org.junit.jupiter.api.*;
 import za.ac.cput.domain.Donation;
 import za.ac.cput.factory.DonationFactory;
-import za.ac.cput.util.Helper;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class DonationRepositoryTest implements IDonationRepository {
-    private final List<Donation> donations = new ArrayList<>();
-    private static DonationRepositoryTest instance;
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class DonationRepositoryTest {
+    private static DonationRepository repository = DonationRepository.getRepository();
+    private static Donation donation = DonationFactory.createDonation(150.00, "DONOR-TEST", "EVENT-TEST");
 
-    // Make constructor private for singleton pattern
-    private DonationRepositoryTest() {
-        initializeTestData();
+    @Test
+    @Order(1)
+    void testCreate() {
+        Donation created = repository.create(donation);
+        assertNotNull(created);
+        assertEquals(donation.getDonationId(), created.getDonationId());
+        System.out.println("Created: " + created);
     }
 
-    // Singleton access method
-    public static DonationRepositoryTest getRepository() {
-        if (instance == null) {
-            instance = new DonationRepositoryTest();
-        }
-        return instance;
+    @Test
+    @Order(2)
+    void testRead() {
+        Donation read = repository.read(donation.getDonationId());
+        assertNotNull(read);
+        assertEquals(donation.getDonationId(), read.getDonationId());
+        System.out.println("Read: " + read);
     }
 
-    private void initializeTestData() {
-        donations.add(createTestDonation(100.00, "DONOR-001", "EVENT-001"));
-        donations.add(createTestDonation(200.00, "DONOR-001", "EVENT-002"));
-        donations.add(createTestDonation(300.00, "DONOR-002", "EVENT-001"));
-        donations.add(createTestDonation(500.00, "DONOR-003", "EVENT-003"));
+    @Test
+    @Order(3)
+    void testUpdate() {
+        Donation updated = new Donation.Builder()
+                .copy(donation)
+                .amount(200.00)
+                .build();
+        assertNotNull(repository.update(updated));
+        assertEquals(200.00, repository.read(donation.getDonationId()).getAmount());
+        System.out.println("Updated: " + updated);
     }
 
-    private Donation createTestDonation(double amount, String donorId, String eventId) {
-        return DonationFactory.createDonation(
-                Helper.generateId(),  // Fixed: Using Helper instead of DonationFactory
-                amount,
-                LocalDate.now(),
-                donorId,
-                eventId
-        );
+    @Test
+    @Order(4)
+    void testDelete() {
+        boolean success = repository.delete(donation.getDonationId());
+        assertTrue(success);
+        System.out.println("Deleted: " + donation.getDonationId());
     }
 
-    // Implement all IDonationRepository methods...
-    @Override
-    public Donation create(Donation donation) {
-        if (donation == null || donation.getDonationId() == null) return null;
-        donations.add(donation);
-        return donation;
+    @Test
+    @Order(5)
+    void testGetAll() {
+        repository.create(donation); // Re-add for this test
+        List<Donation> donations = repository.getAll();
+        assertNotNull(donations);
+        assertFalse(donations.isEmpty());
+        System.out.println("All Donations: " + donations);
     }
 
-    @Override
-    public Donation read(String id) {
-        return donations.stream()
-                .filter(d -> d.getDonationId().equals(id))
-                .findFirst()
-                .orElse(null);
+    @Test
+    void testFindByDonorId() {
+        repository.create(DonationFactory.createDonation(100.00, "DONOR-123", "EVENT-001"));
+        repository.create(DonationFactory.createDonation(200.00, "DONOR-123", "EVENT-002"));
+
+        List<Donation> donations = repository.findByDonorId("DONOR-123");
+        assertEquals(2, donations.size());
+        System.out.println("Donations by Donor: " + donations);
     }
 
-    @Override
-    public Donation update(Donation donation) {
-        return null;
+    @Test
+    void testFindByEventId() {
+        repository.create(DonationFactory.createDonation(300.00, "DONOR-001", "EVENT-456"));
+        repository.create(DonationFactory.createDonation(400.00, "DONOR-002", "EVENT-456"));
+
+        List<Donation> donations = repository.findByEventId("EVENT-456");
+        assertEquals(2, donations.size());
+        System.out.println("Donations by Event: " + donations);
     }
 
-    @Override
-    public boolean delete(String s) {
-        return false;
+    @Test
+    void testGetTotalDonationsForEvent() {
+        repository.create(DonationFactory.createDonation(100.00, "DONOR-A", "EVENT-TOTAL"));
+        repository.create(DonationFactory.createDonation(200.00, "DONOR-B", "EVENT-TOTAL"));
+
+        double total = repository.getTotalDonationsForEvent("EVENT-TOTAL");
+        assertEquals(300.00, total);
+        System.out.println("Total donations for event: " + total);
     }
 
-    @Override
-    public List<Donation> getAll() {
-        return List.of();
-    }
-
-    // ... (keep all other interface method implementations) ...
-
-    // Test-specific methods
-    public void resetRepository() {
-        donations.clear();
-        initializeTestData();
-    }
-
-    public int count() {
-        return donations.size();
-    }
-
-    @Override
-    public List<Donation> findByDonorId(String donorId) {
-        return List.of();
-    }
-
-    @Override
-    public List<Donation> findByEventId(String eventId) {
-        return List.of();
-    }
-
-    @Override
-    public double getTotalDonationsForEvent(String eventId) {
-        return 0;
+    @AfterAll
+    static void tearDown() {
+        repository.getAll().forEach(d -> repository.delete(d.getDonationId()));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
