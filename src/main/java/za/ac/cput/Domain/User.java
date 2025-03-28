@@ -41,7 +41,7 @@ public class User {
         private String email;
 
         // Constructor
-        public Builder() {}
+        public Builder(String s, String email) {}
 
         // Builder methods with return type Builder for method chaining
         public Builder userId(String userId) {
