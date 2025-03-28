@@ -1,9 +1,10 @@
 package za.ac.cput;
 
-import org.charity.domain.*;
-import org.charity.repository.*;
-import org.charity.repository.impl.*;
-import org.charity.util.Helper;
+
+import za.ac.cput.domain.User;
+import za.ac.cput.repository.UserRepository;
+import za.ac.cput.repository.impl.UserRepositoryImpl;
+import za.ac.cput.util.Helper;
 import za.ac.cput.Domain.User;
 
 import java.time.LocalDate;
@@ -126,7 +127,7 @@ public class CharityApplicationCompiler {
                 .firstName("Charlie")
                 .lastName("Brown")
                 .email("charlie.brown@events.com")
-                .phoneNumber("+1234987654")
+                .phoneNumber("+27 6854525285")
                 .registrationDate(LocalDate.now())
                 .organizerLevel(EventOrganizer.OrganizerLevel.SENIOR)
                 .build();
