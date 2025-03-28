@@ -1,7 +1,9 @@
 package za.ac.cput.Domain;
 
 import java.util.Objects;
-
+//Lwazi Shozi
+//230220061
+//27 mARCH 2025
 public class Admin {
     private final String adminId;
     private final String firstName;

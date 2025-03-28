@@ -1,7 +1,5 @@
 package za.ac.cput.Repository;
-//lwazi Nhlakanipho Shozi
-//230220061
-// date 25 March 2025
+
 import org.charity.domain.Admin;
 import java.util.List;
 
